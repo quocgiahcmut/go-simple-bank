@@ -11,6 +11,21 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: simple_bank
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+
     steps:
     - name: Set up Go 1.x
       uses: actions/setup-go@v2
@@ -21,10 +36,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
     
-    # - name: Run migrations
-    #   uses: make migrateup
+    - name: Run migrations
+      run: make migrateup
 
-    # - name: Test
-    #   uses: make test
+    - name: Test
+      run: make test
     
 
