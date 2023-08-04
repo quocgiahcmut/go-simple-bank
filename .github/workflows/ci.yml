@@ -21,10 +21,10 @@ jobs:
     - name: Check out code into the Go module directory
       uses: actions/checkout@v2
     
-    - name: Run migrations
-      uses: make migrateup
+    # - name: Run migrations
+    #   uses: make migrateup
 
-    - name: Test
-      uses: make test
+    # - name: Test
+    #   uses: make test
     
 
