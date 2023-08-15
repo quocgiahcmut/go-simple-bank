@@ -16,4 +16,8 @@ server:
 	go run main.go
 mock:
 	mockgen -package mockdb -destination db\mock\store.go github.com/quocgiahcmut/simple-bank/db/sqlc Store
+remove-pb:
+	rm .\pb\*.go
+proto-gen:
+	protoc --proto_path=proto --go_out=pb --go_opt=paths=source_relative --go-grpc_out=pb --go-grpc_opt=paths=source_relative proto/*.proto
 .PHONY: sqlc
